@@ -694,7 +694,7 @@ async function cadastrar(dados) {
             reloadTable();
         });
     } catch (error) {
-        alert(error);
+        alert(error.response.data);
     }
 }
 // Faz o método put e trata a resposta
@@ -705,7 +705,7 @@ async function atualizar(dados) {
             reloadTable();
         });
     } catch (error) {
-        alert(error);
+        alert(error.response.data);
     }
 }
 // Atualiza a tabela com os dados
@@ -772,7 +772,7 @@ async function loadTable() {
             ]
         });
     }).catch(function(error) {
-        alert(error);
+        alert(error.response.data);
     });
 }
 // Botão vermelho de limpar na tela de gestão. Limpa os campos.
@@ -803,7 +803,7 @@ $('#tabelaLista').on('click', '.excluir', async function() {
         });
         reloadTable();
     } catch (error) {
-        alert(error);
+        alert(error.response.data);
     }
 });
 

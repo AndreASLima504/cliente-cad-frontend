@@ -18,9 +18,10 @@ async function carregarSelect(){
     var select = $("#selectCliente")
     clientes.data.forEach(cli => {
         var option = document.createElement('option')
-        // Note que o valor inserido nas opções é o id, mas o texto é o nome dele
+        // Note que o valor inserido nas opções é o id, mas o texto é o nome e o cpf para identificação
         option.value = cli['id']
-        option.innerHTML = cli['nome']
+
+        option.innerHTML = `${cli['nome']} (${cli['cpf']})`
         select.append(option)
     });
 }
@@ -54,7 +55,7 @@ async function cadastrar(dados){
             console.log(response.data)
         })
     } catch (error) {
-        alert(error);
+        alert(error.response.data);
     }
 }
 
@@ -66,7 +67,7 @@ async function atualizar(dados) {
             reloadTable()
         })
     } catch (error) {
-        alert(error);
+        alert(error.response.data);
     }
 }
 
@@ -76,7 +77,7 @@ async function reloadTable(){
         const response = await axios(url);
         table.clear().rows.add(formatarDadosResposta(response.data)).draw();
     } catch (error) {
-        alert("Erro ao atualizar a tabela: " + error);
+        alert("Erro ao atualizar a tabela: " + error.response.data);
     }
 }
 
@@ -91,6 +92,7 @@ function formatarDadosResposta(resposta){
 
             // Resposta originalmente continha apenas objeto cliente
             nome_cliente: i.cliente.nome,
+            cpf_cliente: i.cliente.cpf,
 
             tipo_contato: i.tipo_contato,
             valor: i.valor,
@@ -109,15 +111,17 @@ async function loadTable(){
             columnDefs:[
                 {title: "Id", targets: 0},
                 {title: "Nome cliente", targets: 1},
-                {title: "Tipo de Contato", targets: 2},
-                {title: "Contato", targets: 3},
-                {title: "Observação", targets: 4},
+                {title: "CPF cliente", targets: 2},
+                {title: "Tipo de Contato", targets: 3},
+                {title: "Contato", targets: 4},
+                {title: "Observação", targets: 5},
                 {title: "Opções", targets: -1},
                 
             ],
             columns: [
                 { data: "id" },
                 { data: "nome_cliente" },
+                { data: "cpf_cliente" },
                 { data: "tipo_contato" },
                 { data: "valor" },
                 {data: "observacao"},
@@ -128,7 +132,7 @@ async function loadTable(){
         })
         
     }).catch(function (error){
-        alert(error)
+        alert(error.response.data)
     })
 }
 
@@ -162,6 +166,6 @@ $('#tabelaLista').on('click', '.excluir', async function () {
         })
         reloadTable()
     } catch (error) {
-        alert(error)
+        alert(error.response.data)
     }
 });

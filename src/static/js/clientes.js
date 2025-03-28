@@ -37,7 +37,7 @@ async function cadastrar(dados){
             reloadTable()
         })
     } catch (error) {
-        alert(error);
+        alert(error.response.data);
     }
 }
 
@@ -49,7 +49,7 @@ async function atualizar(dados) {
             reloadTable()
         })
     } catch (error) {
-        alert(error);
+        alert(error.response.data);
     }
 }
 
@@ -91,7 +91,7 @@ async function loadTable(){
         })
         
     }).catch(function (error){
-        alert(error)
+        alert(error.response.data)
     })
 }
 
@@ -127,6 +127,6 @@ $('#tabelaLista').on('click', '.excluir', async function () {
         })
         reloadTable()
     } catch (error) {
-        alert(error)
+        alert(error.response.data)
     }
 });

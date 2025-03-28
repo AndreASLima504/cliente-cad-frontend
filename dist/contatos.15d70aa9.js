@@ -679,9 +679,9 @@ async function carregarSelect() {
     var select = $("#selectCliente");
     clientes.data.forEach((cli)=>{
         var option = document.createElement('option');
-        // Note que o valor inserido nas opções é o id, mas o texto é o nome dele
+        // Note que o valor inserido nas opções é o id, mas o texto é o nome e o cpf para identificação
         option.value = cli['id'];
-        option.innerHTML = cli['nome'];
+        option.innerHTML = `${cli['nome']} (${cli['cpf']})`;
         select.append(option);
     });
 }
@@ -708,7 +708,7 @@ async function cadastrar(dados) {
             console.log(response.data);
         });
     } catch (error) {
-        alert(error);
+        alert(error.response.data);
     }
 }
 // Faz o método put e trata a resposta
@@ -719,7 +719,7 @@ async function atualizar(dados) {
             reloadTable();
         });
     } catch (error) {
-        alert(error);
+        alert(error.response.data);
     }
 }
 // Atualiza a tabela com os dados
@@ -728,7 +728,7 @@ async function reloadTable() {
         const response = await (0, _axiosDefault.default)(url);
         table.clear().rows.add(formatarDadosResposta(response.data)).draw();
     } catch (error) {
-        alert("Erro ao atualizar a tabela: " + error);
+        alert("Erro ao atualizar a tabela: " + error.response.data);
     }
 }
 // Função necessária para formatar os dados resposta da requisição para exibição correta
@@ -740,6 +740,7 @@ function formatarDadosResposta(resposta) {
             id: i.id,
             // Resposta originalmente continha apenas objeto cliente
             nome_cliente: i.cliente.nome,
+            cpf_cliente: i.cliente.cpf,
             tipo_contato: i.tipo_contato,
             valor: i.valor,
             observacao: i.observacao
@@ -763,16 +764,20 @@ async function loadTable() {
                     targets: 1
                 },
                 {
-                    title: "Tipo de Contato",
+                    title: "CPF cliente",
                     targets: 2
                 },
                 {
-                    title: "Contato",
+                    title: "Tipo de Contato",
                     targets: 3
                 },
                 {
-                    title: "Observa\xe7\xe3o",
+                    title: "Contato",
                     targets: 4
+                },
+                {
+                    title: "Observa\xe7\xe3o",
+                    targets: 5
                 },
                 {
                     title: "Op\xe7\xf5es",
@@ -785,6 +790,9 @@ async function loadTable() {
                 },
                 {
                     data: "nome_cliente"
+                },
+                {
+                    data: "cpf_cliente"
                 },
                 {
                     data: "tipo_contato"
@@ -803,7 +811,7 @@ async function loadTable() {
             ]
         });
     }).catch(function(error) {
-        alert(error);
+        alert(error.response.data);
     });
 }
 // Botão vermelho de limpar na tela de gestão. Limpa os campos.
@@ -833,7 +841,7 @@ $('#tabelaLista').on('click', '.excluir', async function() {
         });
         reloadTable();
     } catch (error) {
-        alert(error);
+        alert(error.response.data);
     }
 });
 
