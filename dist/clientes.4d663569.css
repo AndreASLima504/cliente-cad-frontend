@@ -1,0 +1,108 @@
+.body {
+  border-style: solid;
+  border-width: 2px;
+  flex-direction: column;
+  align-items: center;
+  width: 30vw;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+#options-box {
+  flex-direction: column;
+  align-items: center;
+  width: 30vw;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+h1, h2 {
+  text-align: center;
+  padding: 10px;
+}
+
+#formCadastro {
+  border-style: solid;
+  border-width: 2px;
+  flex-direction: column;
+  align-items: center;
+  width: 30vw;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: large;
+  display: flex;
+}
+
+#tituloCadastro {
+  text-align: center;
+  border-style: solid;
+  border-width: 3px;
+  width: 100%;
+  font-size: large;
+}
+
+#dadosCadastro {
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  padding: 30px;
+  font-size: large;
+  display: flex;
+}
+
+#dadosCadastro label {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+#dadosCadastro div {
+  justify-content: space-between;
+  margin-top: 30px;
+  font-size: large;
+  display: flex;
+}
+
+.tabela th {
+  border: 3px solid #000;
+  font-size: large;
+}
+
+.tabela td {
+  border-style: solid;
+  border-width: 1px;
+  width: 20vw;
+  font-size: large;
+}
+
+#quantity button {
+  color: #000;
+  text-align: center;
+  cursor: pointer;
+  background-color: gray;
+  border: none;
+  margin: 4px 2px;
+  padding: 15px 32px;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.container {
+  place-items: center;
+  display: grid;
+}
+
+#formLogin {
+  text-align: center;
+  cursor: pointer;
+  border: 3px solid;
+  margin: 4px 2px;
+  padding: 30px;
+  font-size: large;
+  text-decoration: none;
+  display: inline-block;
+}
+/*# sourceMappingURL=clientes.4d663569.css.map */

@@ -1,0 +1,1 @@
+{"mappings":"AAAA,4BAA4B;AAC5B,MAAM;AAEN,QAAQ,GAAG,CAAC,MAAM","sources":["src/static/js/clientes.js"],"sourcesContent":["// import axios from \"axios\"\r\nalert('hello world')\r\n\r\nconsole.log(axios(\"127.0.0.1:8080/cliente\"))"],"names":[],"version":3,"file":"clientes.2027632f.js.map","sourceRoot":"/__parcel_source_root/"}
