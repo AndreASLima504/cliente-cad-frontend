@@ -9,9 +9,14 @@
   display: flex;
 }
 
+.container {
+  place-items: center;
+  display: grid;
+}
+
 #options-box {
+  background-color: #0ff;
   flex-direction: column;
-  align-items: center;
   width: 30vw;
   margin-left: auto;
   margin-right: auto;
@@ -75,34 +80,5 @@ h1, h2 {
   border-width: 1px;
   width: 20vw;
   font-size: large;
-}
-
-#quantity button {
-  color: #000;
-  text-align: center;
-  cursor: pointer;
-  background-color: gray;
-  border: none;
-  margin: 4px 2px;
-  padding: 15px 32px;
-  font-size: 16px;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.container {
-  place-items: center;
-  display: grid;
-}
-
-#formLogin {
-  text-align: center;
-  cursor: pointer;
-  border: 3px solid;
-  margin: 4px 2px;
-  padding: 30px;
-  font-size: large;
-  text-decoration: none;
-  display: inline-block;
 }
 /*# sourceMappingURL=clientes.4d663569.css.map */

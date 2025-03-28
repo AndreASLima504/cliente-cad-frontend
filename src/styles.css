@@ -1,20 +1,42 @@
-.body{
-    display: flex;
-    flex-direction: column;
-    width: 30vw;
-    align-items: center;
-    border-style: solid;
-    border-width: 2px;
-    margin-left: auto;
-    margin-right: auto;
+body{
+    background-color: rgb(241, 240, 240);
 }
+
+.container{
+    display: grid;
+    place-items: center;
+}
+
 #options-box{
     display: flex;
     flex-direction: column;
-    width: 30vw;
-    align-items: center;
+    width: 40vw;
+    height: 40vh;
     margin-left: auto;
     margin-right: auto;
+    align-items: center;
+    /* justify-content: space-between; */
+    background-color: white;
+    border: solid;
+    border-radius: 3px;
+    border-width: 1px;
+}
+
+#options-box div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 40%;
+    /* margin-top: auto; */
+    margin-bottom: auto;
+}
+
+#options-box span{
+    margin-top: auto;
+    /* margin-bottom: auto; */
+    font-size: large;
+    font-weight: bold;
+    /* margin-bottom: 10%; */
 }
 
 h1{
@@ -35,6 +57,7 @@ h2{
     border-width: 2px;
     margin-left: auto;
     margin-right: auto;
+    background-color: rgba(255, 255, 255, 0.932);
 }
 
 #tituloCadastro{
@@ -68,7 +91,10 @@ h2{
     justify-content: space-between;
 }
 
+#tabelaLista{
+    background-color: rgba(255, 255, 255, 0.932);
 
+}
 
 .tabela th{
     font-size: large;
@@ -82,36 +108,5 @@ h2{
     width: 20vw;
     border-style: solid;
     border-width: 1px;
-}
-
-#quantity button {
-    font-size: large;
-    background-color: gray;
-    border: none;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-.container{
-    display: grid;
-    place-items: center;
-}
-#formLogin{
-  border: none;
-  padding: 30px 30px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: large;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-style: solid;
-  border-width: 3px;
 }
 

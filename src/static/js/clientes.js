@@ -4,9 +4,13 @@ import 'regenerator-runtime/runtime'
 let table
 const url = "http://localhost:8080/cliente" 
 
+// Executa quando carrega página
+$(document).ready(async function (){
+    loadTable()
+})
+    
 
-loadTable()
-
+// Função corresponde ao botão verde salvar na tela de gestão
 $('#btnSalvar').click(async function(){
     var dados = {
         id: $('#txtId').val(),
@@ -15,6 +19,8 @@ $('#btnSalvar').click(async function(){
         data_nascimento: $('#txtDataNasc').val(),
         endereco: $('#txtEndereco').val()
     }
+
+    // Se não for passado nenhum id, faz o cadastro dos dados, caso passe, envia para atualização
     if(dados['id'] == ""){
         await cadastrar(dados)
     }else{
@@ -23,17 +29,19 @@ $('#btnSalvar').click(async function(){
     reloadTable()
 })
 
+// Faz o método post e trata a resposta
 async function cadastrar(dados){
     try {
         await axios.post(url, dados).then(function(response){
             alert("Cliente cadastrado com sucesso!")
-            console.log(response.data)
+            reloadTable()
         })
     } catch (error) {
         alert(error);
     }
 }
 
+// Faz o método put e trata a resposta
 async function atualizar(dados) {
     try {
         await axios.put(url+`/${dados['id']}`, dados).then(function(response){
@@ -45,6 +53,7 @@ async function atualizar(dados) {
     }
 }
 
+// Atualiza a tabela com os dados
 async function reloadTable(){
     try {
         const response = await axios(url);
@@ -54,6 +63,8 @@ async function reloadTable(){
     }
 }
 
+
+// Monta a datatable pela primeira vez na tela
 async function loadTable(){
     await axios(url).then(function(response){
         table = $('#tabelaLista').DataTable({
@@ -73,7 +84,7 @@ async function loadTable(){
                 { data: "cpf" },
                 { data: "data_nascimento" },
                 {data: "endereco"},
-                {data: null,
+                {data: null,            // Aqui, são criados os dois botões "editar" e "excluir" em html para exclusão e edição do respectivo cliente
                     defaultContent: '<button class="editar">Editar</button>&nbsp;<button class="excluir">Excluir</button>',
                     targets: -1},
             ],
@@ -84,6 +95,7 @@ async function loadTable(){
     })
 }
 
+// Botão vermelho de limpar na tela de gestão. Limpa os campos.
 $('#btnLimpar').click(async function(){
     $("#txtId").val('')
     $("#txtNome").val('')
@@ -92,7 +104,7 @@ $('#btnLimpar').click(async function(){
     $("#txtEndereco").val('')
 })
 
-// Aciona ao clicar nos botões "editar" da tabela, copiando dados para os campos
+// Aciona ao clicar nos botões "editar" da tabela, copiando dados da linha em questão para os campos
 $('#tabelaLista').on('click', '.editar', async function () {
     var row = table.row($(this).parents('tr'));
     var rowData = row.data()
@@ -104,6 +116,8 @@ $('#tabelaLista').on('click', '.editar', async function () {
 
 });
 
+
+// Função que é chamada quando o botão excluir é chamado, enviando uma requisição delete com o id da tupla selecionada
 $('#tabelaLista').on('click', '.excluir', async function () {
     var row = table.row($(this).parents('tr'));
     var rowData = row.data()

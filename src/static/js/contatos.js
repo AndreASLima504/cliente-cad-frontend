@@ -4,18 +4,21 @@ import 'regenerator-runtime/runtime'
 let table
 const url = "http://127.0.0.1:8080/contato" 
 
+
+// Executa quando carrega página
 $(document).ready(async function(){
     loadTable()
     carregarSelect()
 
 })
 
-
+// Faz requisição get dos clientes e adiciona todos no select
 async function carregarSelect(){
     var clientes = await axios("http://localhost:8080/cliente")
     var select = $("#selectCliente")
     clientes.data.forEach(cli => {
         var option = document.createElement('option')
+        // Note que o valor inserido nas opções é o id, mas o texto é o nome dele
         option.value = cli['id']
         option.innerHTML = cli['nome']
         select.append(option)
@@ -23,6 +26,7 @@ async function carregarSelect(){
 }
 
 
+// Função corresponde ao botão verde salvar na tela de gestão
 $('#btnSalvar').click(async function(){
     // Objeto enviado como Json para API (chaves devem ser idênticas as recebidas no backend)
     var dados = {
@@ -32,7 +36,8 @@ $('#btnSalvar').click(async function(){
         valor: $('#txtValor').val(),
         observacao: $('#txtObservacao').val()
     }
-    console.log(dados)
+
+    // Se não for passado nenhum id, faz o cadastro dos dados, caso passe, envia para atualização
     if(dados['id'] == ""){
         await cadastrar(dados)
     }else{
@@ -41,6 +46,7 @@ $('#btnSalvar').click(async function(){
     reloadTable()
 })
 
+// Faz o método post e trata a resposta
 async function cadastrar(dados){
     try {
         await axios.post(url, dados).then(function(response){
@@ -52,6 +58,7 @@ async function cadastrar(dados){
     }
 }
 
+// Faz o método put e trata a resposta
 async function atualizar(dados) {
     try {
         await axios.put(url+`/${dados['id']}`, dados).then(function(response){
@@ -63,6 +70,7 @@ async function atualizar(dados) {
     }
 }
 
+// Atualiza a tabela com os dados
 async function reloadTable(){
     try {
         const response = await axios(url);
@@ -72,13 +80,18 @@ async function reloadTable(){
     }
 }
 
+
+// Função necessária para formatar os dados resposta da requisição para exibição correta
 function formatarDadosResposta(resposta){
     // console.log(resposta)
     var arrayDados = []
     resposta.forEach(i => {
         var respostaForm = {
             id: i.id,
+
+            // Resposta originalmente continha apenas objeto cliente
             nome_cliente: i.cliente.nome,
+
             tipo_contato: i.tipo_contato,
             valor: i.valor,
             observacao: i.observacao
@@ -91,6 +104,7 @@ function formatarDadosResposta(resposta){
 async function loadTable(){
     await axios(url).then(function(response){
         table = $('#tabelaLista').DataTable({
+            // Utiliza dados formatados para estruturação da tabela
             data: formatarDadosResposta(response.data),
             columnDefs:[
                 {title: "Id", targets: 0},
@@ -118,6 +132,7 @@ async function loadTable(){
     })
 }
 
+// Botão vermelho de limpar na tela de gestão. Limpa os campos.
 $('#btnLimpar').click(async function(){
     $("#txtId").val('')
     $("#txtTipoContato").val('')
@@ -137,6 +152,7 @@ $('#tabelaLista').on('click', '.editar', async function () {
 
 });
 
+// Função que é chamada quando o botão excluir é chamado, enviando uma requisição delete com o id da tupla selecionada
 $('#tabelaLista').on('click', '.excluir', async function () {
     var row = table.row($(this).parents('tr'));
     var rowData = row.data()

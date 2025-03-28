@@ -668,7 +668,11 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _runtime = require("regenerator-runtime/runtime");
 let table;
 const url = "http://localhost:8080/cliente";
-loadTable();
+// Executa quando carrega página
+$(document).ready(async function() {
+    loadTable();
+});
+// Função corresponde ao botão verde salvar na tela de gestão
 $('#btnSalvar').click(async function() {
     var dados = {
         id: $('#txtId').val(),
@@ -677,20 +681,23 @@ $('#btnSalvar').click(async function() {
         data_nascimento: $('#txtDataNasc').val(),
         endereco: $('#txtEndereco').val()
     };
+    // Se não for passado nenhum id, faz o cadastro dos dados, caso passe, envia para atualização
     if (dados['id'] == "") await cadastrar(dados);
     else await atualizar(dados);
     reloadTable();
 });
+// Faz o método post e trata a resposta
 async function cadastrar(dados) {
     try {
         await (0, _axiosDefault.default).post(url, dados).then(function(response) {
             alert("Cliente cadastrado com sucesso!");
-            console.log(response.data);
+            reloadTable();
         });
     } catch (error) {
         alert(error);
     }
 }
+// Faz o método put e trata a resposta
 async function atualizar(dados) {
     try {
         await (0, _axiosDefault.default).put(url + `/${dados['id']}`, dados).then(function(response) {
@@ -701,6 +708,7 @@ async function atualizar(dados) {
         alert(error);
     }
 }
+// Atualiza a tabela com os dados
 async function reloadTable() {
     try {
         const response = await (0, _axiosDefault.default)(url);
@@ -709,6 +717,7 @@ async function reloadTable() {
         alert("Erro ao atualizar a tabela: " + error);
     }
 }
+// Monta a datatable pela primeira vez na tela
 async function loadTable() {
     await (0, _axiosDefault.default)(url).then(function(response) {
         table = $('#tabelaLista').DataTable({
@@ -766,6 +775,7 @@ async function loadTable() {
         alert(error);
     });
 }
+// Botão vermelho de limpar na tela de gestão. Limpa os campos.
 $('#btnLimpar').click(async function() {
     $("#txtId").val('');
     $("#txtNome").val('');
@@ -773,7 +783,7 @@ $('#btnLimpar').click(async function() {
     $("#txtDataNasc").val('');
     $("#txtEndereco").val('');
 });
-// Aciona ao clicar nos botões "editar" da tabela, copiando dados para os campos
+// Aciona ao clicar nos botões "editar" da tabela, copiando dados da linha em questão para os campos
 $('#tabelaLista').on('click', '.editar', async function() {
     var row = table.row($(this).parents('tr'));
     var rowData = row.data();
@@ -783,6 +793,7 @@ $('#tabelaLista').on('click', '.editar', async function() {
     $("#txtDataNasc").val(rowData['data_nascimento']);
     $("#txtEndereco").val(rowData['endereco']);
 });
+// Função que é chamada quando o botão excluir é chamado, enviando uma requisição delete com o id da tupla selecionada
 $('#tabelaLista').on('click', '.excluir', async function() {
     var row = table.row($(this).parents('tr'));
     var rowData = row.data();

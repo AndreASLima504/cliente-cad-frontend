@@ -1,0 +1,100 @@
+body {
+  background-color: #f1f0f0;
+}
+
+.container {
+  place-items: center;
+  display: grid;
+}
+
+#options-box {
+  background-color: #fff;
+  border: 1px solid;
+  border-radius: 3px;
+  flex-direction: column;
+  align-items: center;
+  width: 40vw;
+  height: 40vh;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+#options-box div {
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 40%;
+  margin-bottom: auto;
+  display: flex;
+}
+
+#options-box span {
+  margin-top: auto;
+  font-size: large;
+  font-weight: bold;
+}
+
+h1, h2 {
+  text-align: center;
+  padding: 10px;
+}
+
+#formCadastro {
+  background-color: #fffe;
+  border-style: solid;
+  border-width: 2px;
+  flex-direction: column;
+  align-items: center;
+  width: 30vw;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: large;
+  display: flex;
+}
+
+#tituloCadastro {
+  text-align: center;
+  border-style: solid;
+  border-width: 3px;
+  width: 100%;
+  font-size: large;
+}
+
+#dadosCadastro {
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  padding: 30px;
+  font-size: large;
+  display: flex;
+}
+
+#dadosCadastro label {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+#dadosCadastro div {
+  justify-content: space-between;
+  margin-top: 30px;
+  font-size: large;
+  display: flex;
+}
+
+#tabelaLista {
+  background-color: #fffe;
+}
+
+.tabela th {
+  border: 3px solid #000;
+  font-size: large;
+}
+
+.tabela td {
+  border-style: solid;
+  border-width: 1px;
+  width: 20vw;
+  font-size: large;
+}
+/*# sourceMappingURL=cliente-cad-frontend.4d663569.css.map */
