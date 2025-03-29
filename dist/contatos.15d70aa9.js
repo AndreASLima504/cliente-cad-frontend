@@ -705,7 +705,6 @@ async function cadastrar(dados) {
     try {
         await (0, _axiosDefault.default).post(url, dados).then(function(response) {
             alert("Contato cadastrado com sucesso!");
-            console.log(response.data);
         });
     } catch (error) {
         alert(error.response.data);
@@ -715,7 +714,7 @@ async function cadastrar(dados) {
 async function atualizar(dados) {
     try {
         await (0, _axiosDefault.default).put(url + `/${dados['id']}`, dados).then(function(response) {
-            alert("Usu\xe1rio atualizado com sucesso!");
+            alert("Contato atualizado com sucesso!");
             reloadTable();
         });
     } catch (error) {
@@ -733,7 +732,6 @@ async function reloadTable() {
 }
 // Função necessária para formatar os dados resposta da requisição para exibição correta
 function formatarDadosResposta(resposta) {
-    // console.log(resposta)
     var arrayDados = [];
     resposta.forEach((i)=>{
         var respostaForm = {

@@ -714,7 +714,7 @@ async function reloadTable() {
         const response = await (0, _axiosDefault.default)(url);
         table.clear().rows.add(response.data).draw();
     } catch (error) {
-        alert("Erro ao atualizar a tabela: " + error);
+        alert("Erro ao atualizar a tabela: " + error.response.data);
     }
 }
 // Monta a datatable pela primeira vez na tela

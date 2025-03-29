@@ -59,7 +59,7 @@ async function reloadTable(){
         const response = await axios(url);
         table.clear().rows.add(response.data).draw();
     } catch (error) {
-        alert("Erro ao atualizar a tabela: " + error);
+        alert("Erro ao atualizar a tabela: " + error.response.data);
     }
 }
 

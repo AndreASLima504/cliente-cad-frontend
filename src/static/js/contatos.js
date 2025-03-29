@@ -20,7 +20,6 @@ async function carregarSelect(){
         var option = document.createElement('option')
         // Note que o valor inserido nas opções é o id, mas o texto é o nome e o cpf para identificação
         option.value = cli['id']
-
         option.innerHTML = `${cli['nome']} (${cli['cpf']})`
         select.append(option)
     });
@@ -52,7 +51,6 @@ async function cadastrar(dados){
     try {
         await axios.post(url, dados).then(function(response){
             alert("Contato cadastrado com sucesso!")
-            console.log(response.data)
         })
     } catch (error) {
         alert(error.response.data);
@@ -63,7 +61,7 @@ async function cadastrar(dados){
 async function atualizar(dados) {
     try {
         await axios.put(url+`/${dados['id']}`, dados).then(function(response){
-            alert("Usuário atualizado com sucesso!")
+            alert("Contato atualizado com sucesso!")
             reloadTable()
         })
     } catch (error) {
@@ -84,7 +82,6 @@ async function reloadTable(){
 
 // Função necessária para formatar os dados resposta da requisição para exibição correta
 function formatarDadosResposta(resposta){
-    // console.log(resposta)
     var arrayDados = []
     resposta.forEach(i => {
         var respostaForm = {
